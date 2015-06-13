@@ -8,6 +8,15 @@ a modern Python package:
 * Testing across Python interpreters (Py2, Py3, PyPy)
 * Packaging and distribution
 
+
+Status
+------
+
+This repository is the result of a weeks worth of frustrated googling. I don't
+think anything is *too* misleading, but I would deeply appreciate feedback from
+anyone who actually knows what's going on.
+
+
 Examples
 --------
 
@@ -26,7 +35,6 @@ Examples
     True
 
 __ http://man7.org/linux/man-pages/man3/fnmatch.3.html
-
 
 
 Development
