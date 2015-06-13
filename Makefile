@@ -7,4 +7,4 @@ cffi_example/_fnmatch.so: cffi_example/build_fnmatch.py
 	python $<
 
 clean:
-	rm cffi_example/_ffi.*
+	rm cffi_example/_*.c cffi_example/_*.o cffi_example/_*.so
