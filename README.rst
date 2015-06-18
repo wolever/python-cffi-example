@@ -179,6 +179,10 @@ To explain how CFFI works I will use example library, ``libadd``, which exposes
 one function ``int add(int, int)``. All of the code can be found in the
 ``simple-example/`` directory.
 
+Under the hood, CFFI generates C code and compiles it into a `Python extension
+module`__ (see ``simple-example/build_add_module.py`` and
+``simple-example/_add_module.c``).
+
 
 CFFI uses:
 
@@ -191,9 +195,6 @@ CFFI uses:
 2. Library functions like ``ffi.new`` which provide (somewhat) safe,
    garbage-collected access to memory.
 
-
-2. Uses ``ffi.compile()`` to both generate a ``.c`` file which contains a
-   Python extension module, ``_add.c`` (see ``example/add.c``).
 
 __ https://docs.python.org/2.7/extending/extending.html#a-simple-example
 
