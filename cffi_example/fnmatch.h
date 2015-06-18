@@ -14,4 +14,3 @@
 /* Match NAME against the filename pattern PATTERN,
    returning zero if it matches, FNM_NOMATCH if not.  */
 extern int fnmatch (const char *__pattern, const char *__name, int __flags);
-

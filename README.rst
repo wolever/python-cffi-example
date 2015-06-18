@@ -8,6 +8,9 @@ a modern Python package:
 * Testing across Python interpreters (Py2, Py3, PyPy)
 * Packaging and distribution
 
+See also: the brief explanation of `how CFFI works`_, at the end of this
+README.
+
 
 Status
 ------
@@ -167,3 +170,79 @@ Caveats
 
 
 __ https://cffi.readthedocs.org/en/latest/overview.html#out-of-line-abi-level
+
+
+How CFFI Works
+--------------
+
+To explain how CFFI works I will use example library, ``libadd``, which exposes
+one function ``int add(int, int)``. All of the code can be found in the
+``simple-example/`` directory.
+
+
+CFFI uses:
+
+1. The ``build_add_module.py`` file, which contains ``ffi.cdef`` definitions 
+   the C functions and values that will be made available to Python —
+   ``ffi.cdef("int add(int a, int b);")`` — and contains a call to
+   ``ffi.compile()`` which generates the ``_add_module.c`` file and calls
+   ``$CC`` to that into ``_add_module.so``, a `Python extension module`__.
+
+2. Library functions like ``ffi.new`` which provide (somewhat) safe,
+   garbage-collected access to memory.
+
+
+2. Uses ``ffi.compile()`` to both generate a ``.c`` file which contains a
+   Python extension module, ``_add.c`` (see ``example/add.c``).
+
+__ https://docs.python.org/2.7/extending/extending.html#a-simple-example
+
+Shared Libraries
+................
+
+
+.. code:: c
+
+    // add.h
+    extern int add(int a, int b);
+
+    // add.c
+    int add(int a, int b) {
+        return a + b;
+    }
+
+And imagine that it has been compiled into a shared library::
+
+    $ clang -shared -o libadd.so add.c
+    $ nm libadd.so
+    0000000000000f60 T _add
+
+A "normal" C program can link against ``libadd`` to use this function:
+
+.. code:: c
+
+    // add-example.c
+    #include <stdio.h>
+    #include "add.h"
+
+    int main(int argc, char \*argv[]) {
+        int result = add(1, 2);
+        printf("result: %d\n", result);
+        return 0;
+    }
+
+And it would be compiled with::
+
+    $ clang -L. -ladd add-example.c -o add-example
+    $ ./add-example
+    result: 3
+
+
+Shared Libraries as Python Modules
+..................................
+
+
+The `Python documentation`__ has a fantastic
+
+__ https://docs.python.org/2.7/extending/extending.html#a-simple-example
+
