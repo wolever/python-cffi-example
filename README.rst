@@ -180,7 +180,7 @@ one function ``int add(int, int)``. All of the code can be found in the
 ``simple-example/`` directory.
 
 Under the hood, CFFI generates C code and compiles it into a `Python extension
-module`__ (see ``simple-example/build_add_module.py`` and
+module`_ (see ``simple-example/build_add_module.py`` and
 ``simple-example/_add_module.c``).
 
 
@@ -190,13 +190,13 @@ CFFI uses:
    the C functions and values that will be made available to Python —
    ``ffi.cdef("int add(int a, int b);")`` — and contains a call to
    ``ffi.compile()`` which generates the ``_add_module.c`` file and calls
-   ``$CC`` to that into ``_add_module.so``, a `Python extension module`__.
+   ``$CC`` to that into ``_add_module.so``, a `Python extension module`_.
 
 2. Library functions like ``ffi.new`` which provide (somewhat) safe,
    garbage-collected access to memory.
 
 
-__ https://docs.python.org/2.7/extending/extending.html#a-simple-example
+.. _python extension module: https://docs.python.org/2.7/extending/extending.html#a-simple-example
 
 Shared Libraries
 ................
