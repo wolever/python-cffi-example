@@ -26,3 +26,5 @@ __pycache__
 
 cffi_example/_*.c
 cffi_example/_*.so
+simple-example/*.exe
+simple-example/_*.c
